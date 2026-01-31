@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Health Calculator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .calculator {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .calculator .form-control {
+            text-align: right;
+        }
+        .calculator .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .info-box {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .info-box p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h2 class="text-center">Battery Health Calculator</h2>
+            <div class="form-group">
+                <label for="designCapacity">Design Capacity (mWh)</label>
+                <input type="number" id="designCapacity" class="form-control" placeholder="Enter design capacity">
+            </div>
+            <div class="form-group">
+                <label for="fullChargeCapacity">Full Charge Capacity (mWh)</label>
+                <input type="number" id="fullChargeCapacity" class="form-control" placeholder="Enter full charge capacity">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success" onclick="calculateBatteryHealth()">Calculate Battery Health</button>
+            </div>
+            <div class="form-group">
+                <input type="text" id="batteryHealth" class="form-control" readonly placeholder="Battery Health (%)">
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h4>How to Generate Battery Report on Windows</h4>
+            <p>To generate the battery report:</p>
+            <ol>
+                <li>Open Command Prompt as an administrator.</li>
+                <li>Type <code>powercfg /batteryreport</code> and press Enter.</li>
+                <li>This will generate a battery report and save it as an HTML file, usually in your user directory (e.g., <code>C:\Users\[YourUsername]\battery-report.html</code>).</li>
+                <li>Open the HTML file to view detailed information about the battery's health, including its original capacity versus its current capacity.</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <h4>How to Check Battery Health on Android</h4>
+            <p>
+                <a href="phoneBattery.html">Click me to know more...</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function calculateBatteryHealth() {
+            let designCapacity = document.getElementById('designCapacity').value;
+            let fullChargeCapacity = document.getElementById('fullChargeCapacity').value;
+            let batteryHealthField = document.getElementById('batteryHealth');
+
+            if (designCapacity && fullChargeCapacity) {
+                let batteryHealthPercentage = (fullChargeCapacity / designCapacity) * 100;
+                batteryHealthField.value = batteryHealthPercentage.toFixed(2) + '%';
+            } else {
+                batteryHealthField.value = 'Please enter both capacities';
+            }
+        }
+    </script>
+</body>
+</html>
